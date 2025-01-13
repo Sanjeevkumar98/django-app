@@ -1,0 +1,18 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - echo Logging in to Amazon ECR...
+      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 311141532026.dkr.ecr.us-east-1.amazonaws.com
+  build:
+    commands:
+      - echo Building the Docker image...
+      - docker build -t django-app .
+      - docker tag django-app:latest 311141532026.dkr.ecr.us-east-1.amazonaws.com/django-app:latest
+  post_build:
+    commands:
+      - echo Pushing the Docker image...
+      - docker push 311141532026.dkr.ecr.us-east-1.amazonaws.com/django-app:latest
+      - echo Updating ECS Service...
+      - aws ecs update-service --cluster django-cluster --service django-service --force-new-deployment
