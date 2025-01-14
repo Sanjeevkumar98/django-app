@@ -16,5 +16,5 @@ phases:
       - echo Pushing the Docker image...
       - docker push 311141532026.dkr.ecr.us-east-1.amazonaws.com/django-app:latest
       - echo Updating ECS Service...
-      - aws ecs update-service --cluster django-cluster --service django-service --force-new-deployment --region us-east-1
+      - aws ecs update-service --cluster django-cluster --service djano-service --force-new-deployment --region us-east-1
       
