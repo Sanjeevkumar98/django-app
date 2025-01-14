@@ -18,6 +18,6 @@ phases:
       - echo Updating ECS Service...
       - aws ecs update-service --cluster django-cluster --service djano-service --force-new-deployment --region us-east-1
   
-  artifacts:
+artifacts:
   files:
     - '**/*'    
